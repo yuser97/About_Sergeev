@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/About_Sergeev/static/css/main.b7b91083.css",
+    "main.js": "/About_Sergeev/static/js/main.f39ab9ed.js",
+    "index.html": "/About_Sergeev/index.html",
+    "main.b7b91083.css.map": "/About_Sergeev/static/css/main.b7b91083.css.map",
+    "main.f39ab9ed.js.map": "/About_Sergeev/static/js/main.f39ab9ed.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b7b91083.css",
+    "static/js/main.f39ab9ed.js"
+  ]
+}
