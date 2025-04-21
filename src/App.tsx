@@ -10,7 +10,7 @@ type Skill = {
 type Experience = {
   position: { ru: string; en: string };
   company: { ru: string; en: string };
-  period: string;
+  period: { ru: string; en: string };
   description: { ru: string; en: string };
 };
 
@@ -105,7 +105,7 @@ const Resume: React.FC = () => {
 
   const languages: Language[] = [
     { name: { ru: 'Русский', en: 'Russian' }, level: { ru: 'Родной', en: 'Native' } },
-    { name: { ru: 'Английский', en: 'English' }, level: { ru: 'B2 (Средне-продвинутый)', en: 'B2 (Upper Intermediate)' } },
+    { name: { ru: 'Английский', en: 'English' }, level: { ru: 'B2 (Средний)', en: 'B2 (Upper Intermediate)' } },
     { name: { ru: 'Испанский', en: 'Spanish' }, level: { ru: 'C1 (Продвинутый)', en: 'C1 (Intermediate)' } },
   ];
 
@@ -122,7 +122,10 @@ const Resume: React.FC = () => {
     {
       position: { ru: 'Frontend Developer Стажёр', en: 'Frontend Developer Intern' },
       company: { ru: 'Экосистема Альфа', en: 'Alpha Ecosystem' },
-      period: '2025 - Present',
+      period: {
+        ru: '2025 - Настоящее время',
+        en: '2025 - Present'
+      },
       description: {
         ru: 'Стажировка Frontend (React, TypeScript)',
         en: 'Frontend internship (React, TypeScript)'
@@ -306,7 +309,7 @@ const Resume: React.FC = () => {
               <div className="timeline-marker"></div>
               <div className="timeline-content">
                 <h4>{getLocalized(exp.position)}</h4>
-                <p className="company">{getLocalized(exp.company)} • {exp.period}</p>
+                <p className="company">{getLocalized(exp.company)} • {getLocalized(exp.period)}</p>
                 <p>{getLocalized(exp.description)}</p>
               </div>
             </div>
