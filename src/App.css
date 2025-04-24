@@ -21,7 +21,7 @@ body {
   width: 80%;
   max-width: 1000px;
   margin: 60px auto;
-  padding: 2rem;
+  padding: 2rem 0 2rem 0;
   background-color: white;
   box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.212);
   transition: all 0.3s ease-out;
@@ -284,6 +284,7 @@ body {
 }
 
 .language-switcher {
+  padding: 0 2rem 0 2rem;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
@@ -310,32 +311,93 @@ body {
   color: white;
 }
 
-@media (max-width: 768px) {
-  .resume-container {
-    width: 75%;
-    padding: 1.5rem;
-    margin: 40px auto;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.658);
-  }
-  .header {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .header-info {
-    margin-left: 0;
-    margin-top: 1rem;
-  }
-  
-  .two-columns {
-    grid-template-columns: 1fr;
-  }
-  
-  .projects {
-    grid-template-columns: 1fr;
-  }
-
-  .languages, .certificates, .hobbies {
-    grid-template-columns: 1fr;
-  }
+.pdf-container {
+  padding: 2rem 2rem 0 2rem;
 }
+
+.about{
+  padding: 0 2rem 0 2rem;
+}
+
+.about-site {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--light-gray);
+}
+
+.about-site p {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.about-site h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: var(--secondary-color);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.confirm-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirm-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.cancel-button {
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #ddd;
+}
+
+
