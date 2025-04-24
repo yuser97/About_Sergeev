@@ -65,7 +65,10 @@ const translations = {
 
 const Resume: React.FC = () => {
   const [currentLanguage, setCurrentLanguage] = useState<'ru' | 'en'>('ru');
-  const { toPDF, targetRef } = usePDF({ filename: 'resume.pdf' });
+  const { toPDF, targetRef } = usePDF({ filename: 'resume_Sergeev.pdf',  page: {
+    format: [190, 440],
+    orientation: 'portrait'
+  } });
   const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   const handleDownloadConfirm = () => {
