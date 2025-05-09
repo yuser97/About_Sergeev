@@ -1,20 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import './mobile.css';
 import { usePDF } from 'react-to-pdf';
-import { 
-  Skill, 
-  Experience, 
-  Project, 
-  Language, 
-  Certificate, 
-  Education 
+import {
+  Skill,
+  Experience,
+  Project,
+  Language,
+  Certificate,
+  Education
 } from './types';
 
 const translations = {
   about: {
-    ru: "Привет! Меня зовут Юрий, я из Москвы. Давно интересуюсь IT, но раньше не решался сделать первый шаг. Сейчас я активно изучаю React + TypeScript, углубляясь в эти технологии. Также у меня есть опыт разработки на Python, Node.js и PHP. Мой путь в веб-разработку начался в 2020 году с курсов, после которых я продолжил учиться самостоятельно, параллельно работая приемщиком товаров из Китая и арабских стран. Теперь я готов полностью погрузиться в IT и начать карьеру в этой сфере. Спасибо за внимание! Хорошего дня!",
-    en: "Hello! My name is Yuri, I'm from Moscow. I've been interested in IT for a long time but didn't dare to take the first step. Now I'm actively learning React + TypeScript, diving deep into these technologies. I also have experience with Python, Node.js and PHP. My journey into web development started in 2020 with courses, after which I continued to learn on my own while working as a goods receiver from China and Arab countries. Now I'm ready to fully immerse myself in IT and start my career in this field. Thank you for your attention! Have a nice day!"
+    ru: "Привет! Меня зовут Юрий, я из Москвы. Давно интересуюсь IT, но раньше не решался сделать первый шаг. Сейчас активно изучаю React + TypeScript, углубляясь в эти технологии. Также имею опыт разработки на Python, Node.js и PHP. Мой путь в веб-разработку начался в 2019 году с курсов, после которых я продолжил обучение самостоятельно, попутно совмещая фриланс (в основном легкие проекты по верстке или доработке) и работая на основной работе приемщиком товаров из Китая и арабских стран. Теперь я готов полностью погрузиться в IT и начать серьезную карьеру в этой сфере. Спасибо за внимание! Хорошего дня!",
+    en: "Hi! My name is Yuri, I am from Moscow. I have been interested in IT for a long time, but I did not dare to take the first step before. Now I am actively studying React + TypeScript, delving into these technologies. I also have experience in developing in Python, Node.js and PHP. My path to web development began in 2019 with courses, after which I continued to study on my own, simultaneously combining freelancing (mainly light projects on layout or revision) and working at my main job as a receiver of goods from China and Arab countries. Now I am ready to fully immerse myself in IT and start a serious career in this field. Thank you for your attention! Have a nice day!"
   },
   sections: {
     about: { ru: "Обо мне", en: "About Me" },
@@ -65,14 +65,16 @@ const translations = {
 
 const Resume: React.FC = () => {
   const [currentLanguage, setCurrentLanguage] = useState<'ru' | 'en'>('ru');
-  const { toPDF, targetRef } = usePDF({ filename: 'resume_Sergeev.pdf',  page: {
-    format: [190, 440],
-    orientation: 'portrait'
-  } });
+  const { toPDF, targetRef } = usePDF({
+    filename: 'resume_Sergeev.pdf', page: {
+      format: [190, 440],
+      orientation: 'portrait'
+    }
+  });
   const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   const handleDownloadConfirm = () => {
-    toPDF();
+    downloadStaticPDF();
     setShowDownloadModal(false);
   };
 
@@ -162,7 +164,7 @@ const Resume: React.FC = () => {
       linkPages: 'https://yuser97.github.io/exercise1/'
     },
     {
-      name: { ru: 'Rомпонент отображения блока новости', en: 'News block display component' },
+      name: { ru: 'Компонент отображения блока новости (Без адаптивного дизайна)', en: 'News block display component (No responsive design)' },
       description: { ru: 'Typescript / React / Ant design', en: 'Typescript / React / Ant design' },
       link: 'https://github.com/yuser97/Kasp_News',
       linkPages: 'https://yuser97.github.io/Kasp_News/'
@@ -187,10 +189,33 @@ const Resume: React.FC = () => {
     }
   ];
 
+  const downloadStaticPDF = () => {
+    const pdfFileName = currentLanguage === 'ru'
+      ? 'resume_Sergeev_RU.pdf'
+      : 'resume_Sergeev_EN.pdf';
+
+    const pdfUrl = process.env.PUBLIC_URL + '/' + pdfFileName;
+
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = pdfFileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
 
     <div className="resume-container">
       <div className="language-switcher">
+        {process.env.NODE_ENV !== 'production' && (
+          <button
+            onClick={() => toPDF()}
+            style={{ color: "red" }}
+          >
+            {currentLanguage === 'ru' ? 'Преобразовать в РУ PDF' : 'Преобразовать в АНГ PDF'}
+          </button>
+        )}
         <button
           onClick={() => setCurrentLanguage('ru')}
           className={currentLanguage === 'ru' ? 'active' : ''}
@@ -203,10 +228,7 @@ const Resume: React.FC = () => {
         >
           EN
         </button>
-        <button
-          onClick={() => setShowDownloadModal(true)}
-          className="pdf_button"
-        >
+        <button onClick={() => setShowDownloadModal(true)}>
           {currentLanguage === 'ru' ? 'Скачать PDF' : 'Download PDF'}
         </button>
       </div>

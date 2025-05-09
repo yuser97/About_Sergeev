@@ -33,3 +33,5 @@ export type Skill = {
     specialty: { ru: string; en: string };
     period: string;
   };
+
+  
